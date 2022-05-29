@@ -2,13 +2,15 @@
 
 namespace Anik\LaravelBackpack\Extension\Columns;
 
+use Anik\LaravelBackpack\Extension\Contracts\Column as ColumnContract;
 use Anik\LaravelBackpack\Extension\Contracts\ProvidesValue;
 use Anik\LaravelBackpack\Extension\Contracts\Relation;
+use Anik\LaravelBackpack\Extension\Extensions\Attributable;
 use Closure;
 
-class Column
+class Column implements ColumnContract
 {
-    protected array $attributes = [];
+    use Attributable;
 
     public function __construct(string $name, ?string $label = null)
     {
@@ -24,25 +26,6 @@ class Column
     {
         $this->setOrderable(false);
         $this->setSearchLogic(false);
-
-        return $this;
-    }
-
-    public function addAttribute(string $key, mixed $value, bool $mergeRecursive = false): self
-    {
-        $this->attributes = call_user_func_array(
-            $mergeRecursive ? 'array_merge_recursive' : 'array_merge',
-            [$this->attributes, [$key => $value]]
-        );
-
-        return $this;
-    }
-
-    public function addAttributes(array $attributes, bool $mergeRecursive = false): self
-    {
-        foreach ($attributes as $k => $v) {
-            $this->addAttribute($k, $v, $mergeRecursive);
-        }
 
         return $this;
     }
@@ -205,20 +188,8 @@ class Column
         return static::create('id', $label ?? '#');
     }
 
-    public function unset(string $key): self
-    {
-        unset($this->attributes[$key]);
-
-        return $this;
-    }
-
     public static function create(string $name, ?string $label = null): self
     {
         return new static($name, $label);
-    }
-
-    public function toArray(): array
-    {
-        return $this->attributes;
     }
 }
