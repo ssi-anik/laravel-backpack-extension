@@ -1,0 +1,24 @@
+{
+    "name": "anik/laravel-backpack-extension",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^8.1",
+        "backpack/crud": "^5.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^7.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Anik\\LaravelBackpack\\Extension\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Syed Sirajul Islam Anik",
+            "email": "sirajul.islam.anik@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
