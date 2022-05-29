@@ -6,5 +6,5 @@ use Closure;
 
 interface ProvidesValue
 {
-    public function valueResolver(): Closure;
+    public function valueResolver(): ?Closure;
 }

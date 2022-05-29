@@ -8,5 +8,5 @@ interface Relation
 
     public function method(): string;
 
-    public function attribute(): string;
+    public function attribute(): ?string;
 }

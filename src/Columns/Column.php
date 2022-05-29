@@ -3,6 +3,7 @@
 namespace Anik\LaravelBackpack\Extension\Columns;
 
 use Anik\LaravelBackpack\Extension\Contracts\Column as ColumnContract;
+use Anik\LaravelBackpack\Extension\Contracts\ProvidesAttribute;
 use Anik\LaravelBackpack\Extension\Contracts\ProvidesValue;
 use Anik\LaravelBackpack\Extension\Contracts\Relation;
 use Anik\LaravelBackpack\Extension\Extensions\Attributable;
@@ -60,7 +61,7 @@ class Column implements ColumnContract
         return $this->addAttribute('type', $type);
     }
 
-    public function setEntity(string $entity): self
+    public function setEntity(bool|string $entity): self
     {
         return $this->addAttribute('entity', $entity);
     }
@@ -174,10 +175,17 @@ class Column implements ColumnContract
     {
         $this->setType($relation->type());
         $this->setEntity($relation->method());
-        $this->setAttribute($relation->attribute());
 
-        if ($relation instanceof ProvidesValue) {
-            $this->setValue($relation->valueResolver());
+        if (!is_null($attribute = $relation->attribute())) {
+            $this->setAttribute($attribute);
+        }
+
+        if ($relation instanceof ProvidesAttribute && !empty($attributes = $relation->attributes())) {
+            $this->addAttributes($attributes);
+        }
+
+        if ($relation instanceof ProvidesValue && !is_null($value = $relation->valueResolver())) {
+            $this->setValue($value);
         }
 
         return $this;
