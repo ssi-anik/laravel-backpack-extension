@@ -10,8 +10,8 @@ class Widget implements WidgetContract
     use Attributable;
 
     private bool $isHidden = false;
-    private bool $makeFirst = false;
-    private bool $makeLast = false;
+    private bool $isFirst = false;
+    private bool $isLast = false;
 
     public function __construct(?string $name = null, ?string $type = null, ?string $section = null)
     {
@@ -67,25 +67,25 @@ class Widget implements WidgetContract
 
     public function shouldBeFirst(): self
     {
-        $this->makeFirst = true;
+        $this->isFirst = true;
 
         return $this;
     }
 
     public function isFirst(): bool
     {
-        return $this->makeFirst;
+        return $this->isFirst;
     }
 
     public function shouldBeLast(): self
     {
-        $this->makeLast = true;
+        $this->isLast = true;
 
         return $this;
     }
 
     public function isLast(): bool
     {
-        return $this->makeLast;
+        return $this->isLast;
     }
 }
