@@ -2,15 +2,18 @@
 
 namespace Anik\LaravelBackpack\Extension\Extensions;
 
+use Illuminate\Support\Arr;
+
 trait Attributable
 {
     protected array $attributes = [];
 
     public function addAttribute(string $key, mixed $value, bool $mergeRecursive = false): self
     {
+        $attributes = Arr::add([], $key, $value);
         $this->attributes = call_user_func_array(
             $mergeRecursive ? 'array_merge_recursive' : 'array_merge',
-            [$this->attributes, [$key => $value]]
+            [$this->attributes, $attributes]
         );
 
         return $this;
@@ -27,7 +30,7 @@ trait Attributable
 
     public function unset(string $key): self
     {
-        unset($this->attributes[$key]);
+        Arr::forget($this->attributes, $key);
 
         return $this;
     }
