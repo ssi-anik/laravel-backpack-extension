@@ -31,12 +31,12 @@ class Button implements ButtonContract
     {
     }
 
-    public function setContent(string $content): self
+    protected function setContent(string $content): self
     {
         return $this->addAttribute('content', $content);
     }
 
-    public function setName(string $name): self
+    protected function setName(string $name): self
     {
         return $this->addAttribute('name', $name);
     }
