@@ -13,9 +13,4 @@ class ModelFunctionButton extends Button
     {
         return parent::setType('model_function');
     }
-
-    public function setFunctionName(string $function): self
-    {
-        return $this->setContent($function);
-    }
 }

@@ -13,9 +13,4 @@ class ViewButton extends Button
     {
         return parent::setType('view');
     }
-
-    public function setView(string $view): self
-    {
-        return $this->setContent($view);
-    }
 }
