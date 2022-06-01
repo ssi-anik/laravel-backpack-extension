@@ -30,4 +30,18 @@ class TestCase extends BaseTestCase
             BackpackServiceProvider::class,
         ];
     }
+
+    protected function modifyAttributesUsingMethods($instance, $methods)
+    {
+        foreach ($methods as $method => $params) {
+            $this->modifyAttributeUsingMethod($instance, $method, $params);
+        }
+
+        return $instance;
+    }
+
+    protected function modifyAttributeUsingMethod($instance, $method, $params)
+    {
+        return call_user_func_array([$instance, $method], $params);
+    }
 }
