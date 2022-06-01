@@ -15,11 +15,6 @@ class AjaxFilterTest extends TestCase
         return ['name' => self::NAME, 'type' => 'select2_ajax',];
     }
 
-    private function getFilterInstance(...$params): Filter
-    {
-        return new AjaxFilter(...$params);
-    }
-
     public function getFilterInstanceUsingCreate(...$params): Filter
     {
         return AjaxFilter::create(...$params);
@@ -102,7 +97,7 @@ class AjaxFilterTest extends TestCase
 
     public function test_filter_instance_is_by_default_select2_ajax_type()
     {
-        $filter = $this->getFilterInstance(self::NAME);
+        $filter = new AjaxFilter(self::NAME);
         $this->assertEquals($this->mergeAttributesWithDefault(), $filter->toArray());
     }
 
