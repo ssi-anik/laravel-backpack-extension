@@ -24,7 +24,7 @@ jobs:
 
   tests:
     needs: coding-standard
-    name: "OS: ${{ matrix.os }} | PHP: ${{ matrix.php }} | Laravel: ${{ matrix.laravel }} | BP-CRUD: ${{ matrix.backpack }}"
+    name: "${{ matrix.os }} | PHP: ${{ matrix.php }} | Laravel: ${{ matrix.laravel }} | CRUD: ${{ matrix.backpack }}"
     runs-on: ${{ matrix.os }}
 
     strategy:
