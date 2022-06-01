@@ -72,6 +72,15 @@ jobs:
           php-version: 8.1
       - name: Install dependencies
         run: composer install --no-interaction --prefer-dist
+      - name: Install Backpack Pro
+        env:
+          username: ${{ secrets.BACKPACK_AUTH_USERNAME }}
+          password: ${{ secrets.BACKPACK_AUTH_PASSWORD }}
+        if: "${{ env.username != '' }}"
+        run: |
+          composer config "repositories.backpack/*" composer https://repo.backpackforlaravel.com
+          composer config http-basic.backpackforlaravel.com ${{ env.username }} ${{ env.password }} --no-ansi --no-interaction
+          composer require backpack/pro ^1.0 --no-interaction --prefer-dist
       - name: Run tests for coverage
         run: ./vendor/bin/phpunit --coverage-clover=coverage.xml
       - name: Push to Codecov
