@@ -8,7 +8,6 @@ use Anik\LaravelBackpack\Extension\Test\TestCase;
 
 class AjaxFilterTest extends TestCase
 {
-    const METHODS = 'methods';
     const NAME = 'test_filter';
 
     protected function getDefaultAttributes(): array

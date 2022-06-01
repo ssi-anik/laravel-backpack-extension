@@ -7,6 +7,7 @@ use Orchestra\Testbench\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {
+    const METHODS = 'methods';
     const PARAM = 'param';
     const EXPECTED = 'expected';
 
