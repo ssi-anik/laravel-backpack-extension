@@ -50,6 +50,7 @@ jobs:
           USERNAME: ${{ secrets.BACKPACK_AUTH_USERNAME }}
         if: "${{ env.USERNAME != '' }}"
         run: |
+          composer config "repositories.backpack/*" composer https://repo.backpackforlaravel.com
           composer config http-basic.backpackforlaravel.com $BACKPACK_AUTH_USERNAME $BACKPACK_AUTH_PASSWORD --no-ansi --no-interaction
           composer require backpack/pro ^1.0 --no-interaction --prefer-dist
       - name: Run tests
