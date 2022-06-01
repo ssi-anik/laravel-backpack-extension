@@ -13,29 +13,19 @@ class Widget implements WidgetContract
     private bool $isFirst = false;
     private bool $isLast = false;
 
-    public function __construct(?string $name = null, ?string $type = null, ?string $section = null)
+    public function __construct(?string $type = null, ?string $name = null, ?string $section = null)
     {
-        if (!is_null($name)) {
-            $this->setName($name);
+        if (!is_null($type)) {
+            $this->addAttribute('type', $type);
         }
 
-        if (!is_null($type)) {
-            $this->setType($type);
+        if (!is_null($name)) {
+            $this->addAttribute('name', $name);
         }
 
         if (!is_null($section)) {
             $this->setSection($section);
         }
-    }
-
-    public function setName(string $name): self
-    {
-        return $this->addAttribute('name', $name);
-    }
-
-    public function setType(string $type): self
-    {
-        return $this->addAttribute('type', $type);
     }
 
     public function setSection(string $section): self
