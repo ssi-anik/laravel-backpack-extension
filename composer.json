@@ -14,6 +14,11 @@
             "Anik\\LaravelBackpack\\Extension\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Anik\\LaravelBackpack\\Extension\\Test\\": "tests/"
+        }
+    },
     "authors": [
         {
             "name": "Syed Sirajul Islam Anik",
