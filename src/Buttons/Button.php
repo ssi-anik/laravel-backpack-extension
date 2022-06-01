@@ -11,6 +11,7 @@ class Button implements ButtonContract
 
     protected bool $isFirst = false;
     protected bool $isLast = false;
+    protected bool $shouldReplace = false;
 
     public function __construct(string $content, ?string $name = null, ?string $type = null)
     {
@@ -104,6 +105,19 @@ class Button implements ButtonContract
     {
         return $this->isLast;
     }
+
+    public function shouldReplaceExisting(): self
+    {
+        $this->shouldReplace = true;
+
+        return $this;
+    }
+
+    public function replaceExisting(): bool
+    {
+        return $this->shouldReplace;
+    }
+
 
     public static function create(string $content, ?string $name = null): static
     {
