@@ -105,6 +105,7 @@ class AjaxFilterTest extends TestCase
     public function test_filter_instantiate_with_create_method_pushes_provided_param_to_attribute($param, $expected)
     {
         $filter = $this->getFilterInstanceUsingCreate(...$param);
+        /*$this->verifyThatResultsAreEqual($expected, $filter);*/
         foreach ($expected as $method => $result) {
             $this->assertEquals($result, call_user_func([$filter, $method]));
         }
@@ -115,9 +116,7 @@ class AjaxFilterTest extends TestCase
     {
         $filter = $this->getFilterInstanceUsingCreate(self::NAME);
         $this->modifyAttributesUsingMethods($filter, $methods);
-        $this->assertEquals(
-            $expected,
-            $filter->toArray()
-        );
+        /*$this->verifyThatResultsAreEqual($expected, $filter);*/
+        $this->assertEquals($expected, $filter->toArray());
     }
 }

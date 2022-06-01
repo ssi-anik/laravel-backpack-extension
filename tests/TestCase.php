@@ -44,4 +44,21 @@ class TestCase extends BaseTestCase
     {
         return call_user_func_array([$instance, $method], $params);
     }
+
+    protected function verifyThatResultsAreEqual($expected, $instance, bool $identical = false)
+    {
+        $firstKey = array_key_first($expected);
+        $expected = in_array($firstKey, get_class_methods($instance)) ? $expected : ['toArray' => $expected,];
+
+        foreach ($expected as $method => $result) {
+            $this->verifyThatResultIsEqual($result, $instance, $method, $identical);
+        }
+    }
+
+    protected function verifyThatResultIsEqual($expected, $instance, $method, bool $identical = false)
+    {
+        $identical
+            ? $this->assertSame($expected, call_user_func([$instance, $method]))
+            : $this->assertEquals($expected, call_user_func([$instance, $method,]));
+    }
 }

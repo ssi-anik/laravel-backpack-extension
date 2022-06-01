@@ -116,10 +116,8 @@ class FilterTest extends TestCase
     {
         $filter = $this->getFilterInstanceUsingCreate(self::NAME);
         $this->modifyAttributesUsingMethods($filter, $methods);
-        $this->assertEquals(
-            $expected,
-            $filter->toArray()
-        );
+        /*$this->verifyThatResultsAreEqual($expected, $filter);*/
+        $this->assertEquals($expected, $filter->toArray());
     }
 
     /** @dataProvider filterValues */

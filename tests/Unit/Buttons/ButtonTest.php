@@ -136,6 +136,7 @@ class ButtonTest extends TestCase
         $button = $this->getButtonInstance('content');
         $this->assertFalse($button->isFirst());
         $this->assertFalse($button->isLast());
+
         $button->shouldBeFirst()->shouldBeLast();
         $this->assertTrue($button->isFirst());
         $this->assertTrue($button->isLast());
