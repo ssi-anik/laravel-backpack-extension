@@ -171,7 +171,7 @@ class Column implements ColumnContract
         return $this->addAttribute('tableColumn', $tableColumn);
     }
 
-    public function related(Relation $relation): self
+    public function related(Relation $relation, bool $mergeRecursive = false): self
     {
         $this->setType($relation->type());
         $this->setEntity($relation->method());
@@ -181,7 +181,7 @@ class Column implements ColumnContract
         }
 
         if ($relation instanceof ProvidesAttribute && !empty($attributes = $relation->attributes())) {
-            $this->addAttributes($attributes);
+            $this->addAttributes($attributes, $mergeRecursive);
         }
 
         if ($relation instanceof ProvidesValue && !is_null($value = $relation->valueResolver())) {
