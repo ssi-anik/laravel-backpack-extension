@@ -45,6 +45,13 @@ jobs:
       - name: Install dependencies
         run: |
           composer require laravel/framework:^${{ matrix.laravel }} backpack/crud:^${{ matrix.backpack }} --no-interaction --prefer-dist
+      - name: Install Backpack Pro
+        env:
+          USERNAME: ${{ secrets.BACKPACK_AUTH_USERNAME }}
+        if: "${{ env.USERNAME != '' }}"
+        run: |
+          composer config http-basic.backpackforlaravel.com $BACKPACK_AUTH_USERNAME $BACKPACK_AUTH_PASSWORD --no-ansi --no-interaction
+          composer require backpack/pro ^1.0 --no-interaction --prefer-dist
       - name: Run tests
         run: ./vendor/bin/phpunit --testdox --verbose
 
