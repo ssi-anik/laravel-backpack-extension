@@ -131,23 +131,12 @@ class ButtonTest extends TestCase
         $this->assertEquals($expected, $button->toArray());
     }
 
-    public function test_button_can_be_put_in_first_or_last()
-    {
-        $button = $this->getButtonInstance('content');
-        $this->assertFalse($button->isFirst());
-        $this->assertFalse($button->isLast());
-
-        $button->shouldBeFirst()->shouldBeLast();
-        $this->assertTrue($button->isFirst());
-        $this->assertTrue($button->isLast());
-    }
-
     public function test_button_should_replace_existing()
     {
         $button = $this->getButtonInstance('content');
-        $this->assertFalse($button->replaceExisting());
-
-        $button->shouldReplaceExisting();
         $this->assertTrue($button->replaceExisting());
+
+        $button->shouldNotReplaceExisting();
+        $this->assertFalse($button->replaceExisting());
     }
 }

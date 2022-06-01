@@ -9,16 +9,14 @@ class Button implements ButtonContract
 {
     use Attributable;
 
-    protected bool $isFirst = false;
-    protected bool $isLast = false;
-    protected bool $shouldReplace = false;
+    protected bool $shouldReplace = true;
 
     public function __construct(string $content, ?string $name = null, ?string $type = null)
     {
-        $this->setContent($content);
+        $this->addAttribute('content', $content);
 
         if (!is_null($name)) {
-            $this->setName($name);
+            $this->addAttribute('name', $name);
         }
 
         if (!is_null($type)) {
@@ -30,16 +28,6 @@ class Button implements ButtonContract
 
     protected function setupDefaults()
     {
-    }
-
-    protected function setContent(string $content): self
-    {
-        return $this->addAttribute('content', $content);
-    }
-
-    protected function setName(string $name): self
-    {
-        return $this->addAttribute('name', $name);
     }
 
     public function setType(string $type): self
@@ -82,33 +70,9 @@ class Button implements ButtonContract
         return $this->setPosition('end');
     }
 
-    public function shouldBeFirst(): self
+    public function shouldNotReplaceExisting(): self
     {
-        $this->isFirst = true;
-
-        return $this;
-    }
-
-    public function isFirst(): bool
-    {
-        return $this->isFirst;
-    }
-
-    public function shouldBeLast(): self
-    {
-        $this->isLast = true;
-
-        return $this;
-    }
-
-    public function isLast(): bool
-    {
-        return $this->isLast;
-    }
-
-    public function shouldReplaceExisting(): self
-    {
-        $this->shouldReplace = true;
+        $this->shouldReplace = false;
 
         return $this;
     }
@@ -117,7 +81,6 @@ class Button implements ButtonContract
     {
         return $this->shouldReplace;
     }
-
 
     public static function create(string $content, ?string $name = null): static
     {
