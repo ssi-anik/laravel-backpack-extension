@@ -8,8 +8,6 @@ use Anik\LaravelBackpack\Extension\Test\TestCase;
 class FilterTest extends TestCase
 {
     const METHODS = 'methods';
-    const PARAM = 'param';
-    const EXPECTED = 'expected';
     const NAME = 'test_filter';
 
     protected function getDefaultAttributes(): array
@@ -115,7 +113,7 @@ class FilterTest extends TestCase
     }
 
     /** @dataProvider filterInstanceSetAttributes */
-    public function test_filter_instance($methods, $expected)
+    public function test_filter_instance_can_modify_attributes($methods, $expected)
     {
         $filter = $this->getFilterInstanceUsingCreate(self::NAME);
         foreach ($methods as $method => $params) {

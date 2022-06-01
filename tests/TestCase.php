@@ -7,6 +7,9 @@ use Orchestra\Testbench\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase
 {
+    const PARAM = 'param';
+    const EXPECTED = 'expected';
+
     protected function getDefaultAttributes(): array
     {
         return [];
