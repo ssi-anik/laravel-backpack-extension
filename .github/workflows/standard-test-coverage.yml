@@ -46,13 +46,10 @@ jobs:
         run: |
           composer require laravel/framework:^${{ matrix.laravel }} backpack/crud:^${{ matrix.backpack }} --no-interaction --prefer-dist
       - name: Install Backpack Pro
-        env:
-          username: ${{ secrets.BACKPACK_AUTH_USERNAME }}
-          password: ${{ secrets.BACKPACK_AUTH_PASSWORD }}
-        if: "${{ env.username != '' }}"
+        if: "${{ secrets.BACKPACK_AUTH_USERNAME != '' }}"
         run: |
+          composer config http-basic.backpackforlaravel.com ${{ secrets.BACKPACK_AUTH_USERNAME }} ${{ secrets.BACKPACK_AUTH_PASSWORD }} --no-ansi --no-interaction
           composer config "repositories.backpack/*" composer https://repo.backpackforlaravel.com
-          composer config http-basic.backpackforlaravel.com ${{ env.username }} ${{ env.password }} --no-ansi --no-interaction
           composer require backpack/pro ^1.0 --no-interaction --prefer-dist
       - name: Run tests
         run: ./vendor/bin/phpunit --testdox --verbose
@@ -73,13 +70,10 @@ jobs:
       - name: Install dependencies
         run: composer install --no-interaction --prefer-dist
       - name: Install Backpack Pro
-        env:
-          username: ${{ secrets.BACKPACK_AUTH_USERNAME }}
-          password: ${{ secrets.BACKPACK_AUTH_PASSWORD }}
-        if: "${{ env.username != '' }}"
+        if: "${{ secrets.BACKPACK_AUTH_USERNAME != '' }}"
         run: |
+          composer config http-basic.backpackforlaravel.com ${{ secrets.BACKPACK_AUTH_USERNAME }} ${{ secrets.BACKPACK_AUTH_PASSWORD }} --no-ansi --no-interaction
           composer config "repositories.backpack/*" composer https://repo.backpackforlaravel.com
-          composer config http-basic.backpackforlaravel.com ${{ env.username }} ${{ env.password }} --no-ansi --no-interaction
           composer require backpack/pro ^1.0 --no-interaction --prefer-dist
       - name: Run tests for coverage
         run: ./vendor/bin/phpunit --coverage-clover=coverage.xml
