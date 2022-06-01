@@ -115,9 +115,7 @@ class FilterTest extends TestCase
     public function test_filter_instance_can_modify_attributes($methods, $expected)
     {
         $filter = $this->getFilterInstanceUsingCreate(self::NAME);
-        foreach ($methods as $method => $params) {
-            call_user_func_array([$filter, $method], $params);
-        }
+        $this->modifyAttributesUsingMethods($filter, $methods);
         $this->assertEquals(
             $expected,
             $filter->toArray()
