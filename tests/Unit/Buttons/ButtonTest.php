@@ -141,4 +141,13 @@ class ButtonTest extends TestCase
         $this->assertTrue($button->isFirst());
         $this->assertTrue($button->isLast());
     }
+
+    public function test_button_should_replace_existing()
+    {
+        $button = $this->getButtonInstance('content');
+        $this->assertFalse($button->replaceExisting());
+
+        $button->shouldReplaceExisting();
+        $this->assertTrue($button->replaceExisting());
+    }
 }
