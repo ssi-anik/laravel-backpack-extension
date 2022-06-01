@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Extensions;
+namespace Anik\LaravelBackpack\Extension\Buttons;
 
 use Anik\LaravelBackpack\Extension\Contracts\Button as ButtonContract;
 use Anik\LaravelBackpack\Extension\Extensions\Attributable;
@@ -105,7 +105,7 @@ class Button implements ButtonContract
         return $this->isLast;
     }
 
-    public static function create(string $content, ?string $name): static
+    public static function create(string $content, ?string $name = null): static
     {
         return new static($content, $name);
     }

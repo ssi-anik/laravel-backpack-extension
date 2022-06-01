@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Extensions;
+namespace Anik\LaravelBackpack\Extension\Buttons;
 
 class ViewButton extends Button
 {
