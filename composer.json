@@ -1,13 +1,21 @@
 {
     "name": "anik/laravel-backpack-extension",
+    "description": "Class based imperative approach for Laravel backpack/crud",
     "type": "library",
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Syed Sirajul Islam Anik",
+            "email": "sirajul.islam.anik@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
     "require": {
-        "php": "^8.1",
+        "php": "^8.0",
         "backpack/crud": "^5.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^7.5"
+        "orchestra/testbench": "^6.0|^7.5"
     },
     "autoload": {
         "psr-4": {
@@ -18,12 +26,5 @@
         "psr-4": {
             "Anik\\LaravelBackpack\\Extension\\Test\\": "tests/"
         }
-    },
-    "authors": [
-        {
-            "name": "Syed Sirajul Islam Anik",
-            "email": "sirajul.islam.anik@gmail.com"
-        }
-    ],
-    "minimum-stability": "stable"
+    }
 }
