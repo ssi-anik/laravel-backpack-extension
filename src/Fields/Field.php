@@ -4,6 +4,7 @@ namespace Anik\LaravelBackpack\Extension\Fields;
 
 use Anik\LaravelBackpack\Extension\Contracts\Field as FieldContract;
 use Anik\LaravelBackpack\Extension\Contracts\ProvidesAttribute;
+use Anik\LaravelBackpack\Extension\Contracts\ProvidesValue;
 use Anik\LaravelBackpack\Extension\Contracts\Relation;
 use Anik\LaravelBackpack\Extension\Extensions\Attributable;
 
@@ -41,22 +42,27 @@ class Field implements FieldContract
         return $this->addAttribute('type', $type);
     }
 
-    public function related(Relation $relation): self
+    public function related(Relation $relation, bool $mergeRecursive = false): self
     {
         $this->setType($relation->type());
         $this->setEntity($relation->method());
-        $this->setAttribute($relation->attribute());
 
-        if ($relation instanceof ProvidesAttribute) {
-            foreach ($relation->attributes() as $k => $v) {
-                $this->customAttribute($k, $v);
-            }
+        if (!is_null($attribute = $relation->attribute())) {
+            $this->setAttribute($attribute);
+        }
+
+        if ($relation instanceof ProvidesAttribute && !empty($attributes = $relation->attributes())) {
+            $this->addAttributes($attributes, $mergeRecursive);
+        }
+
+        if ($relation instanceof ProvidesValue && !is_null($value = $relation->valueResolver())) {
+            $this->setValue($value);
         }
 
         return $this;
     }
 
-    public function setRelationshipType(string $type): self
+    public function setRelationType(string $type): self
     {
         return $this->addAttribute('relation_type', $type);
     }
@@ -106,7 +112,7 @@ class Field implements FieldContract
         return $this->addAttribute('pivot', $pivot);
     }
 
-    public function addSubfields(mixed $subfields): self
+    public function setSubfields(mixed $subfields): self
     {
         return $this->addAttribute('subfields', $subfields);
     }
