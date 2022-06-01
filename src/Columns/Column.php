@@ -116,12 +116,12 @@ class Column implements ColumnContract
         return $this->addAttribute('suffix', $prefix);
     }
 
-    public function addWrapper(mixed $wrapper, bool $mergeRecursive = false): self
+    public function setWrapper(mixed $wrapper, bool $mergeRecursive = false): self
     {
         return $this->addAttribute('wrapper', $wrapper, $mergeRecursive);
     }
 
-    public function addOptions(mixed $options): self
+    public function setOptions(mixed $options): self
     {
         return $this->addAttribute('options', $options);
     }
