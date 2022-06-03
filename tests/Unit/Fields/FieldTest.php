@@ -325,4 +325,17 @@ class FieldTest extends TestCase
         $this->modifyAttributesUsingMethods($field, $methods);
         $this->assertSame($expected, $field->toArray());
     }
+
+    public function test_set_options_method_considers_mergeRecursive_parameter()
+    {
+        $field = $this->getFieldInstanceUsingCreate(self::NAME);
+        // mergeRecursive: true by default
+        $field->setOptions(['opt' => 1]);
+        $field->setOptions(['opt' => 2]);
+        $this->assertSame(['opt' => [1, 2]], $field->toArray()['options']);
+        // mergeRecursive: false
+        $field->setOptions(['opt' => 1], false);
+        $field->setOptions(['opt' => 2], false);
+        $this->assertSame(['opt' => 2], $field->toArray()['options']);
+    }
 }

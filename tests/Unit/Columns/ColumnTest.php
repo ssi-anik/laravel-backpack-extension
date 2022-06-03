@@ -275,9 +275,15 @@ class ColumnTest extends TestCase
             $column->toArray()
         );
 
-        $column = Column::ID('LABEL');
+        $column = Column::ID('id_label');
         $this->assertSame(
-            ['name' => 'id', 'label' => 'LABEL', 'orderable' => false, 'searchLogic' => false],
+            ['name' => 'id', 'label' => 'id_label', 'orderable' => false, 'searchLogic' => false],
+            $column->toArray()
+        );
+
+        $column = Column::ID('id_label', 'id_name');
+        $this->assertSame(
+            ['name' => 'id_name', 'label' => 'id_label', 'orderable' => false, 'searchLogic' => false],
             $column->toArray()
         );
     }
@@ -288,5 +294,18 @@ class ColumnTest extends TestCase
         $column = $this->getColumnInstanceUsingCreate(self::NAME);
         $this->modifyAttributesUsingMethods($column, $methods);
         $this->assertSame($expected, $column->toArray());
+    }
+
+    public function test_set_options_method_considers_mergeRecursive_parameter()
+    {
+        $column = $this->getColumnInstanceUsingCreate(self::NAME);
+        // mergeRecursive: true by default
+        $column->setOptions(['opt' => 1]);
+        $column->setOptions(['opt' => 2]);
+        $this->assertSame(['opt' => [1, 2]], $column->toArray()['options']);
+        // mergeRecursive: false
+        $column->setOptions(['opt' => 1], false);
+        $column->setOptions(['opt' => 2], false);
+        $this->assertSame(['opt' => 2], $column->toArray()['options']);
     }
 }

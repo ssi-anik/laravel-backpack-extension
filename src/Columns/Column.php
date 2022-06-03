@@ -121,9 +121,9 @@ class Column implements ColumnContract
         return $this->addAttribute('wrapper', $wrapper, $mergeRecursive);
     }
 
-    public function setOptions(mixed $options): self
+    public function setOptions(mixed $options, bool $mergeRecursive = true): self
     {
-        return $this->addAttribute('options', $options);
+        return $this->addAttribute('options', $options, $mergeRecursive);
     }
 
     public function isExportOnlyField(): self
@@ -191,9 +191,9 @@ class Column implements ColumnContract
         return $this;
     }
 
-    public static function ID(?string $label = null): self
+    public static function ID(?string $label = null, ?string $name = null): self
     {
-        return static::create('id', $label ?? '#');
+        return static::create($name ?? 'id', $label ?? '#');
     }
 
     public static function create(string $name, ?string $label = null): self
