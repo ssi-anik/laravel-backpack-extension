@@ -7,9 +7,10 @@ anik/laravel-backpack-extension
 In the table view of [backpack/crud](https://packagist.org/packages/backpack/crud) list operation, if a column exists in
 database table, it's by default
 [searchable and orderable](https://github.com/Laravel-Backpack/CRUD/blob/e488a93661220c64259df96665e095b98372f138/src/app/Library/CrudPanel/Traits/Columns.php#L380-L381)
-unless instructed otherwise. Also, to add a **column** or **field** to the operation, it is required to pass an array. In PHP,
-array keys are case-sensitive and this make it tedious when adding a field or column. This package allows class based
-imperative approach over passing the array. So no more tedious, repetitive typing game matching the exact array keys. 
+unless instructed otherwise. Also, to add a **column** or **field** to the operation, it is required to pass an array.
+In PHP, array keys are case-sensitive and this make it tedious when adding a field or column. This package allows class
+based imperative approach over passing the array. So no more tedious, repetitive typing game matching the exact array
+keys.
 **BE FORGETFUL** sometimes? 🤷
 
 # Documentation
@@ -99,6 +100,8 @@ class AccountCrudController extends CrudController
 - `setTableColumn(bool $tableColumn)`
 - `related(Relation $relation, bool $mergeRecursive = false)` - Check [Relation](#relation) section
 
+#### Note
+
 Column class uses `\Anik\LaravelBackpack\Extension\Extensions\Attributable` trait.
 Check [Attributable](#attributable-trait) section.
 
@@ -185,6 +188,8 @@ class AccountCrudController extends CrudController
 - `setAllowsNull(bool $allowNull)`
 - `setTab(string $tab)`
 
+#### Note
+
 Field class uses `\Anik\LaravelBackpack\Extension\Extensions\Attributable` trait.
 Check [Attributable](#attributable-trait) section.
 
@@ -234,6 +239,8 @@ class AccountCrudController extends CrudController
 - `setValues(string|array|callable $values)`
 - `setLogic(callable $logic)`
 - `setFallbackLogic(callable $fallbackLogic)`
+
+#### Note
 
 Filter class uses `\Anik\LaravelBackpack\Extension\Extensions\Attributable` trait.
 Check [Attributable](#attributable-trait) section.
@@ -291,6 +298,8 @@ class AccountCrudController extends CrudController
 - `Style::setRel(string $rel)`
 - `Style::setHref(string $href)`
 - `Style::setStack(string $stack)`
+
+#### Note
 
 Widget class uses `\Anik\LaravelBackpack\Extension\Extensions\Attributable` trait.
 Check [Attributable](#attributable-trait) section.
@@ -360,6 +369,8 @@ class AccountCrudController extends CrudController
 - `setValueResolver(Closure $resolver)` - Set a closure which will be responsible to calculate the value for
   field/column
 
+#### Note
+
 Only **CustomRelation** class uses `\Anik\LaravelBackpack\Extension\Extensions\Attributable` trait.
 Check [Attributable](#attributable-trait) section.
 
@@ -376,7 +387,9 @@ will have access to the following methods.
 - `toArray(): array`
 
 - `$mergeRecursive` indicates to if merge should be done using **array_merge** vs **array_merge_recursive**.
-- `addAttribute`, `addAttributes`, `unset` methods allows **dot notation** based keys when **adding** or **unset**ting values.
+- `addAttribute`, `addAttributes`, `unset` methods allows **dot notation** based keys when **adding** or **unset**ting
+  values.
+
 #### Example
 
 ```php
